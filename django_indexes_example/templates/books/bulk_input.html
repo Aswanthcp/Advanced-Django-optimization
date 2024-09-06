@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulk Book Input (JSON)</title>
+  </head>
+  <body>
+    <h1>Bulk Book Input using JSON</h1>
+
+    <!-- Display any messages -->
+    {% if message %}
+    <p><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <label for="json_input">Enter Books JSON:</label><br />
+      <textarea id="json_input" name="json_input" rows="10" cols="50">
+        [
+            {
+                "title": "Sample Book 1",
+                "author": "Author 1",
+                "publication_year": 2021
+            },
+            {
+                "title": "Sample Book 2",
+                "author": "Author 2",
+                "publication_year": 2020
+            }
+        ]
+        </textarea
+      ><br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

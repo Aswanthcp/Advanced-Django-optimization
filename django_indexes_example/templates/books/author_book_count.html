@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Author Book Counts</title>
+  </head>
+  <body>
+    <h1>Number of Books by Each Author</h1>
+    <ul>
+      {% for author_count in author_counts %}
+      <li>{{ author_count.author }}: {{ author_count.book_count }} books</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
