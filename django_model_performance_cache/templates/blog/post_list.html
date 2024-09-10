@@ -1,3 +1,4 @@
+# post_list.html (remains the same)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,10 +6,19 @@
     <title>Posts</title>
   </head>
   <body>
-    <h1>All Posts</h1>
+    <h1>Post List</h1>
+
+    {% if cache_used %}
+    <p>Posts loaded from cache.</p>
+    {% else %}
+    <p>Posts loaded from the database.</p>
+    {% endif %}
+
     <ul>
       {% for post in posts %}
-      <li>{{ post.title }} - {{ post.content }}</li>
+      <li>{{ post.title }}: {{ post.content }}</li>
+      {% empty %}
+      <li>No posts available.</li>
       {% endfor %}
     </ul>
     <a href="{% url 'create_post' %}">Create New Post</a>

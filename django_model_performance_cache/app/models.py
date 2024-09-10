@@ -9,11 +9,11 @@ class PostQuerySet(models.QuerySet):
 
         if cached_posts is None:
             cached_posts = list(super().all())
-            cache.set(cache_key, cached_posts)
+            cache.set(cache_key, cached_posts, timeout=3600)
         return cached_posts
 
 
-class PostManager(models.Manager):  # Update inheritance
+class PostManager(models.Manager):
     def get_queryset(self):
         return PostQuerySet(self.model, using=self._db)
 
@@ -25,9 +25,16 @@ class Post(models.Model):
     objects = PostManager()
 
     def save(self, *args, **kwargs):
-        cache.delete("all_posts")  # Clear cache after saving
+        cache.delete("all_posts")
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        cache.delete("all_posts")  # Clear cache after deletion
+        cache.delete("all_posts")
         super().delete(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def get_cache_key(cls):
+        return f"all_posts_{cls._meta.app_label}_{cls._meta.model_name}"
