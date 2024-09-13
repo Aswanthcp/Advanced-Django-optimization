@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}My stocks blog{% endblock %}
+
+{% block css %}
+<style></style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <select class="form-select" multiple="" aria-label="Multiple select example">
+    {% for i in tracker_list %}
+    <option value={{i}}>{{i}}</option>
+    {% endfor%}
+  </select>
+  <br>
+  <div class="d-grid gap-2">
+    <input class="btn btn-primary" type="submit" value="Submit">
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script></script>
+{% endblock %}
